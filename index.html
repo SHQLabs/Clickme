@@ -49,14 +49,18 @@
       font-size: 60px;
       margin-bottom: 10px;
     }
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  margin-top: 30px;
+}
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      position: relative;
-      height: 60px;
-    }
+#noBtn {
+  position: relative;
+}
 
     button {
       padding: 12px 28px;
@@ -111,12 +115,11 @@
     <div class="emoji">🐻💖</div>
     <h1>My dearest Kanchan,</h1>
     <p>will you be my Valentine?</p>
-
-    <div class="buttons">
-      <button id="yesBtn" onclick="sayYes()">Yes</button>
-      <button id="noBtn" onmouseover="moveNo()">No</button>
-    </div>
-  </div>
+    
+<div class="buttons">
+  <button id="yesBtn" onclick="sayYes()">Yes</button>
+  <button id="noBtn" onmouseover="moveNo()">No</button>
+</div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
