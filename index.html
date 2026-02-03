@@ -13,7 +13,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       overflow: hidden;
     }
 
@@ -23,9 +23,11 @@
       border-radius: 25px;
       text-align: center;
       width: 90%;
-      max-width: 400px;
+      max-width: 420px;
       box-shadow: 0 15px 40px rgba(0,0,0,0.25);
       animation: pop 0.8s ease;
+      position: relative;
+      z-index: 2;
     }
 
     @keyframes pop {
@@ -40,7 +42,7 @@
 
     p {
       font-size: 16px;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .emoji {
@@ -51,8 +53,9 @@
     .buttons {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 25px;
       position: relative;
+      height: 60px;
     }
 
     button {
@@ -61,11 +64,16 @@
       border: none;
       border-radius: 30px;
       cursor: pointer;
+      transition: 0.2s;
     }
 
     #yesBtn {
       background: #ff4d6d;
       color: white;
+    }
+
+    #yesBtn:hover {
+      background: #e63950;
     }
 
     #noBtn {
@@ -74,17 +82,30 @@
       position: absolute;
     }
 
-    #yesBtn:hover {
-      background: #e63950;
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 24px;
+      animation: floatUp linear forwards;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 
 <body>
-
-  <audio id="music" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8f94f3d5f2.mp3?filename=romantic-piano-112191.mp3" type="audio/mpeg">
-  </audio>
 
   <div class="card" id="card">
     <div class="emoji">🐻💖</div>
@@ -99,7 +120,6 @@
 
   <script>
     const noBtn = document.getElementById("noBtn");
-    const music = document.getElementById("music");
 
     function moveNo() {
       const x = Math.random() * (window.innerWidth - 100);
@@ -108,35 +128,79 @@
       noBtn.style.top = y + "px";
     }
 
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = Math.random() > 0.8 ? "🐥" : "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+
     function sayYes() {
-      music.play();
+
+      setInterval(createHeart, 300);
+
+      // Open song safely
+      window.open(
+        "https://open.spotify.com/track/2wrJq5XKLnmhRXHIAf9xBa",
+        "_blank"
+      );
 
       document.body.innerHTML = `
         <div style="
-          height:100vh;
+          min-height:100vh;
           display:flex;
           justify-content:center;
           align-items:center;
-          text-align:center;
           background:linear-gradient(135deg,#ff758f,#ffb3c6);
           font-family:Arial;
-          padding:20px;">
+          padding:20px;
+          text-align:center;">
+
           <div style="
             background:white;
-            padding:40px;
+            padding:35px;
             border-radius:25px;
-            box-shadow:0 15px 40px rgba(0,0,0,0.3);
-            max-width:420px;">
+            max-width:420px;
+            box-shadow:0 15px 40px rgba(0,0,0,0.3);">
+
             <h1>💘 She said YES 💘</h1>
-            <p style="font-size:18px;">
-              My dearest Kanchan,<br><br>
-              You just made my heart smile in ways words can’t fully capture.
-              From this moment, this Valentine’s Day becomes special —
-              not because of roses or chocolates, but because of **you**.
-              <br><br>
-              Thank you for being my favorite thought, my calm, and my chaos 💕
+
+            <p style="font-size:17px; line-height:1.6;">
+              My dearest <b>Baby 🐥</b>,<br><br>
+              You just made my heart melt completely.
+              If love had a sound, it would be this moment 💕
             </p>
-            <h2>😘🌹</h2>
+
+            <hr style="margin:20px 0;">
+
+            <p style="font-size:16px; font-weight:bold;">
+              This February month is special
+            </p>
+
+            <p style="font-size:15px; line-height:1.6;">
+              4 Mondays<br>
+              4 Tuesdays<br>
+              4 Wednesdays<br>
+              4 Thursdays<br>
+              4 Fridays<br>
+              4 Saturdays<br>
+              4 Sundays
+            </p>
+
+            <p style="margin-top:15px; font-style:italic;">
+              This only happens once every 823 years!
+            </p>
+
+            <p style="margin-top:20px;">
+              🎶 10,000 Hours — because I’d spend every one of them with you 💖
+            </p>
+
           </div>
         </div>
       `;
