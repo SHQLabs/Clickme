@@ -49,18 +49,15 @@
       font-size: 60px;
       margin-bottom: 10px;
     }
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-  position: relative;
-  margin-top: 30px;
-}
 
-#noBtn {
-  position: relative;
-}
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+      margin-top: 30px;
+    }
 
     button {
       padding: 12px 28px;
@@ -83,7 +80,7 @@
     #noBtn {
       background: #adb5bd;
       color: white;
-      position: absolute;
+      position: relative;
     }
 
     /* Floating hearts */
@@ -94,6 +91,7 @@
       animation: floatUp linear forwards;
       opacity: 0.8;
       z-index: 1;
+      pointer-events: none;
     }
 
     @keyframes floatUp {
@@ -115,11 +113,12 @@
     <div class="emoji">🐻💖</div>
     <h1>My dearest Kanchan,</h1>
     <p>will you be my Valentine?</p>
-    
-<div class="buttons">
-  <button id="yesBtn" onclick="sayYes()">Yes</button>
-  <button id="noBtn" onmouseover="moveNo()">No</button>
-</div>
+
+    <div class="buttons">
+      <button id="yesBtn" onclick="sayYes()">Yes</button>
+      <button id="noBtn" onmouseover="moveNo()">No</button>
+    </div>
+  </div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
@@ -148,17 +147,11 @@
 
       setInterval(createHeart, 300);
 
-      // Open song safely
-     window.open(
-  "https://www.youtube.com/watch?v=VIT4kqQte00&autoplay=1",
-  "_blank"
-);
-
-
       document.body.innerHTML = `
         <div style="
           min-height:100vh;
           display:flex;
+          flex-direction:column;
           justify-content:center;
           align-items:center;
           background:linear-gradient(135deg,#ff758f,#ffb3c6);
@@ -168,16 +161,17 @@
 
           <div style="
             background:white;
-            padding:35px;
+            padding:30px;
             border-radius:25px;
             max-width:420px;
             box-shadow:0 15px 40px rgba(0,0,0,0.3);">
 
-            <h1>💘  Yesiiiiiieeee 💘</h1>
+            <h1>💘 Yesiiiiiieeee 💘</h1>
 
             <p style="font-size:17px; line-height:1.6;">
               My dearest <b>Baby 🐥</b>,<br><br>
-              You should know , you have bewitched me, body and soul. I can't help but admire you every second love💕
+              You should know, you have bewitched me, body and soul.
+              I can't help but admire you every second, love 💕
             </p>
 
             <hr style="margin:20px 0;">
@@ -194,24 +188,35 @@
               4 Fridays<br>
               4 Saturdays<br>
               4 Sundays
-
             </p>
 
             <p style="margin-top:15px; font-style:italic;">
-              This only happens once every 823 years!
-              AND IT BECAME EVEN MORE SPECIAL BECAUSE I GET TO LIVE in IT WITH YOUuu!!!!!!!!!!!
-
-              Thank you for saying "YES" 🐥 I LOVE YOU MY VALENTINE. 
+              This only happens once every 823 years!<br><br>
+              AND IT BECAME EVEN MORE SPECIAL BECAUSE I GET TO LIVE IN IT WITH YOUUU!!!!!!!!!!!<br><br>
+              Thank you for saying "YES" 🐥 I LOVE YOU MY VALENTINE.
             </p>
-          
-
-            <p style="margin-top:20px;">
-              🎶 10,000 Hours — because I’d spend every one of them with you 💖
-            </p>
-
           </div>
+
+          <!-- YouTube Short Embed -->
+          <iframe id="shortVid"
+            src="https://www.youtube.com/embed/SHsuHSoltvg?autoplay=1&mute=1"
+            style="width:90%; max-width:420px; height:300px; margin-top:20px; border:none; border-radius:15px;"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+          </iframe>
+
+          <p style="margin-top:10px; font-size:15px; cursor:pointer;"
+             onclick="unmuteShort()">
+            🎶 Tap here to enable sound
+          </p>
+
         </div>
       `;
+    }
+
+    function unmuteShort() {
+      const iframe = document.getElementById("shortVid");
+      iframe.src = "https://www.youtube.com/embed/SHsuHSoltvg?autoplay=1&mute=0";
     }
   </script>
 
